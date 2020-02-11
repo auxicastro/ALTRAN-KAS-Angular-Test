@@ -1,0 +1,36 @@
+<div class="card-deck mb-3 text-center">
+    <div *ngFor="let item of data" class="card mb-4 shadow-sm">
+        <div class="card-header">
+            <h4 class="my-0 font-weight-normal">{{item.name}}</h4>
+        </div>
+        <div class="card-body">
+            <h2 class="card-title pricing-card-title">{{item.temp[0].celsius}} <small class="text-muted"> ºC </small></h2>
+            <ul class="list-unstyled mt-3 mb-4">
+                <li>Latitud:{{item.lat}}</li>
+                <li>Longitud:{{item.lon}}</li>
+            </ul>
+            <button (click)="handleClick(item.city)" type="button" class="btn btn-lg btn-block btn-outline-primary">Ver historial</button>
+        </div>
+    </div>
+</div>
+<div *ngIf="historicoCity.length">
+    <div *ngFor="let hc of historicoCity">
+        <h2>Histórico de temperaturas de {{hc.name}}</h2>
+        <div class="table-responsive">
+            <table class="table table-striped table-sm">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Temperatura</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let temp of hc.temp">
+                        <td>{{temp.date | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+                        <td>{{temp.celsius}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
